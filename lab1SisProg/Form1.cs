@@ -60,15 +60,7 @@ namespace lab1SisProg
                 string[] temp = str[i].Split(' ');
                 if (temp.Length >= 3)
                 {
-                    if (temp[2].IndexOf('"') == 1 && temp[temp.Length - 1].LastIndexOf('"') == temp[temp.Length - 1].Length - 1)
-                    {
-                        for (int j = 3; j < temp.Length; j++)
-                        {
-                            temp[2] += " " + temp[j];
-                            temp[j] = "";
-                        }
-                    }
-                    else if (temp[1].IndexOf('"') == 1 && (temp[temp.Length - 1].LastIndexOf('"') == temp[temp.Length - 1].Length - 1))
+                    if (temp[1].IndexOf('"') == 1 && (temp[temp.Length - 1].LastIndexOf('"') == temp[temp.Length - 1].Length - 1))
                     {
                         for (int j = 2; j < temp.Length; j++)
                         {
@@ -76,6 +68,15 @@ namespace lab1SisProg
                             temp[j] = "";
                         }
                     }
+                    else if (temp[2].IndexOf('"') == 1 && temp[temp.Length - 1].LastIndexOf('"') == temp[temp.Length - 1].Length - 1)
+                    {
+                        for (int j = 3; j < temp.Length; j++)
+                        {
+                            temp[2] += " " + temp[j];
+                            temp[j] = "";
+                        }
+                    }
+                    
                 }
                 temp = temp.Where(x => !string.IsNullOrEmpty(x)).ToArray();
                 temp[temp.Length - 1] = temp[temp.Length - 1].Replace("\r", "");
@@ -124,7 +125,7 @@ namespace lab1SisProg
                     {
                         if (dC.CheckDirective(temp[0]) || fsp.FindCode(temp[0], operationCodeArray) != -1)
                         {
-                            if (temp[2].IndexOf('"') == 1 && temp[3].IndexOf('"') == temp[3].Length - 1)
+                            if (temp[2].IndexOf('"') == 1 && temp[2].IndexOf('"') == temp[2].Length - 1)
                             {
                                 sourceCodeArray[i, 1] = temp[0];
                                 sourceCodeArray[i, 2] = temp[1] + " " + temp[2];
